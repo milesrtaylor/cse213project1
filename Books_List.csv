@@ -1,0 +1,16 @@
+Book ID,Title,Author,ISBN,Category,Availability
+101,To Kill a Mockingbird,Harper Lee,9780061120084,Fiction,Available
+102,1984,George Orwell,9780451524935,Dystopian,Borrowed
+103,The Great Gatsby,F. Scott Fitzgerald,9780743273565,Classic,Available
+104,The Catcher in the Rye,J.D. Salinger,9780316769488,Classic,Available
+105,Moby-Dick,Herman Melville,9781503280786,Classic,Borrowed
+106,Pride and Prejudice,Jane Austen,9781503290563,Classic,Available
+107,The Hobbit,J.R.R. Tolkien,9780547928227,Fantasy,Borrowed
+108,Brave New World,Aldous Huxley,9780060850524,Dystopian,Available
+109,Fahrenheit 451,Ray Bradbury,9781451673319,Dystopian,Available
+110,The Lord of the Rings,J.R.R. Tolkien,9780544003415,Fantasy,Borrowed
+111,Jane Eyre,Charlotte Brontë,9780141441146,Classic,Available
+112,Wuthering Heights,Emily Brontë,9780141439556,Classic,Borrowed
+113,Crime and Punishment,Fyodor Dostoevsky,9780486415871,Classic,Available
+114,The Odyssey,Homer,9780140268867,Epic,Available
+115,War and Peace,Leo Tolstoy,9780199232765,Historical Fiction,Borrowed
