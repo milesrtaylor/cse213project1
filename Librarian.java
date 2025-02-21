@@ -24,6 +24,7 @@ public class Librarian {
         return inputPassword.equals(this.password);
     }
 
+    // Following methods do not directly operate on the librarian, probably should be in main instead
     public void showMenu() {
         if (!authenticate()) {
             System.out.println("Incorrect password! Access denied.");
@@ -42,15 +43,24 @@ public class Librarian {
             scanner.nextLine(); 
 
             switch (choice) {
-                case 1: listAllBooks(); break;
-                case 2: listBorrowedBooks(); break;
-                case 3: listOverdueBooks(); break;
-                case 4: System.out.println("Exiting librarian menu..."); return;
-                default: System.out.println("Invalid choice! Try again.");
+                case 1:
+                	listAllBooks();
+                	break;
+                case 2:
+                	listBorrowedBooks();
+                	break;
+                case 3:
+                	listOverdueBooks();
+                	break;
+                case 4:
+                	System.out.println("Exiting librarian menu...");
+                	return;
+                default:
+                	System.out.println("Invalid choice, try again.");
             }
         }
     }
-
+    
     private void listAllBooks() {
         System.out.println("\nAll Books:");
         for (Book book : books) {
