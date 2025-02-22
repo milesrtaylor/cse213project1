@@ -7,7 +7,8 @@ import java.util.Scanner;
 
 public class MyMain {
     public static void main(String[] args) {
-        Scanner input = new Scanner(System.in);
+    	try {
+    	Scanner input = new Scanner(System.in);
         List<Book> books = Database.loadBooks();
         List<Student> students = Database.loadStudents();
         List<Transaction> transactions = Database.loadTransactions();
@@ -98,8 +99,9 @@ public class MyMain {
                                     for (Book book : books) {
                                         if (book.getId() == return_id && !book.isAvailable()) {
                                             book.setAvailability(true);
+                                            final Student studentRef = currentStudent; // Need a final reference for lamba expression
                                             transactions.removeIf(t -> t.getBookId() == return_id
-                                            		&& t.getStudentId() == currentStudent.getId());
+                                            		&& t.getStudentId() == studentRef.getId());
                                             System.out.println("Book returned successfully.");
                                             returned = true;
                                             break;
@@ -161,5 +163,9 @@ public class MyMain {
                     System.out.println("Invalid choice, please try again.");
             }
         }
+    	}
+    	catch (IOException e) { 
+    		System.out.println("Error loading database files: " + e.getMessage());
+    	}
     }
 }
