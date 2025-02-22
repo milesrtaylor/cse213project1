@@ -12,10 +12,15 @@ public class Librarian {
     private Scanner scanner;
     
     public Librarian(String password) {
-        this.password = password;
-        this.books = Database.loadBooks();
-        this.transactions = Database.loadTransactions();
-        this.scanner = new Scanner(System.in);
+    	try {
+	        this.password = password;
+	        this.books = Database.loadBooks();
+	        this.transactions = Database.loadTransactions();
+	        this.scanner = new Scanner(System.in);
+    	}
+    	catch (IOException e) {
+    		System.out.println("Error loading database files: " + e.getMessage());
+    	}
     }
 
     public boolean authenticate() {
