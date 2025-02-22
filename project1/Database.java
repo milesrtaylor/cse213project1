@@ -13,6 +13,7 @@ public class Database {
     public static List<Book> loadBooks() throws IOException {
         List<Book> books = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(book_file))) {
+        	br.readLine(); // Skip the first line (header)
             String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
@@ -26,6 +27,7 @@ public class Database {
     public static List<Student> loadStudents() throws IOException {
     	List<Student> students = new ArrayList<>();
     	try (BufferedReader br = new BufferedReader(new FileReader(student_file))) {
+    		br.readLine(); // Skip the first line (header)
             String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
@@ -40,13 +42,19 @@ public class Database {
     	List<Transaction> transactions = new ArrayList<>();
     	int max_id = 300;
     	try (BufferedReader br = new BufferedReader(new FileReader(transaction_file))) {
+    		br.readLine(); // Skip the first line (header)
     		String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
+                // Check if return date exists (to prevent IndexOutOfBoundsException)
+                LocalDate returnDate = (data.length > 5 && !data[5].trim().equalsIgnoreCase("NULL")
+                		&& !data[5].trim().isEmpty()) 
+                                        ? LocalDate.parse(data[5].trim()) 
+                                        : null; // Set returnDate to null if missing
                 transactions.add(new Transaction(Integer.parseInt(data[0]),
                 		Integer.parseInt(data[1]), Integer.parseInt(data[2]),
                 		LocalDate.parse(data[3]), LocalDate.parse(data[4]),
-                		LocalDate.parse(data[5])));
+                		returnDate));
                 if (Integer.parseInt(data[0]) > max_id) { // Track highest transaction ID
                     max_id = Integer.parseInt(data[0]);
                 }
