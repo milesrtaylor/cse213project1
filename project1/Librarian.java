@@ -13,8 +13,8 @@ public class Librarian {
     
     public Librarian(String password) {
         this.password = password;
-        this.books = ??; // TODO
-        this.transactions = ??; // TODO
+        this.books = Database.loadBooks();
+        this.transactions = Database.loadTransactions();
         this.scanner = new Scanner(System.in);
     }
 
@@ -22,6 +22,10 @@ public class Librarian {
         System.out.print("Enter librarian password: ");
         String inputPassword = scanner.nextLine();
         return inputPassword.equals(this.password);
+    }
+    
+    public boolean checkPassword(String inputPassword) {
+        return this.password.equals(inputPassword);
     }
 
     // Following methods do not directly operate on the librarian, probably should be in main instead
