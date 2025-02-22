@@ -38,6 +38,7 @@ public class Database {
     
     public static List<Transaction> loadTransactions() throws IOException {
     	List<Transaction> transactions = new ArrayList<>();
+    	int max_id = 300;
     	try (BufferedReader br = new BufferedReader(new FileReader(transaction_file))) {
     		String line;
             while ((line = br.readLine()) != null) {
@@ -46,11 +47,15 @@ public class Database {
                 		Integer.parseInt(data[1]), Integer.parseInt(data[2]),
                 		LocalDate.parse(data[3]), LocalDate.parse(data[4]),
                 		LocalDate.parse(data[5])));
+                if (Integer.parseInt(data[0]) > max_id) { // Track highest transaction ID
+                    max_id = Integer.parseInt(data[0]);
+                }
             }
     	}
+    	Transaction.setNextId(max_id + 1); // Update next available ID
     	return transactions;
     }
-
+    
     public static void saveBooks(List<Book> books) throws IOException {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(book_file))) {
             for (Book book : books) {
