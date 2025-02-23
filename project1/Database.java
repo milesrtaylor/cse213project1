@@ -17,8 +17,9 @@ public class Database {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(",");
+                boolean availability = data[5].trim().equalsIgnoreCase("Available"); // maps "Available" to true and "Borrowed" to false
                 books.add(new Book(Integer.parseInt(data[0]), data[1], data[2],
-                		data[3], data[4], Boolean.parseBoolean(data[5])));
+                		data[3], data[4], availability));
             }
         }
         return books;
