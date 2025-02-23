@@ -27,7 +27,7 @@ public class MyMain {
                     System.out.print("Enter your Student ID: ");
                     int student_id = input.nextInt();
                     input.nextLine();
-
+                    // TODO: might want to make sure input is an integer before moving on
                     Student currentStudent = null;
                     for (Student student : students) {
                         if (student.getId() == student_id) {
@@ -43,8 +43,7 @@ public class MyMain {
                             System.out.println("2. Borrow Book");
                             System.out.println("3. Return Book");
                             System.out.println("4. View All Books");
-                            System.out.println("5. Enter Librarian Password");
-                            System.out.println("6. Back to Main Menu");
+                            System.out.println("5. Back to Main Menu");
                             System.out.print("Choose an option: ");
                             int student_choice = input.nextInt();
                             input.nextLine();
@@ -118,23 +117,13 @@ public class MyMain {
                                     }
                                     break;
                                 case 5:
-                                    System.out.print("Enter librarian password: ");
-                                    String password = input.nextLine();
-                                    Librarian librarian = new Librarian("admin123");
-                                    if (librarian.checkPassword(password)) {
-                                        librarian.showMenu();
-                                    } else {
-                                        System.out.println("Incorrect password.");
-                                    }
-                                    break;
-                                case 6:
                                     System.out.println("Returning to main menu...");
                                     break;
                                 default:
                                     System.out.println("Invalid choice.");
                             }
 
-                            if (student_choice == 6) {
+                            if (student_choice == 5) {
                                 break;
                             }
                         }
@@ -144,14 +133,8 @@ public class MyMain {
                     break;
 
                 case 2:
-                    System.out.print("Enter librarian password: ");
-                    String librarianPassword = input.nextLine();
-                    Librarian librarian = new Librarian("admin123");
-                    if (librarian.checkPassword(librarianPassword)) {
-                        librarian.showMenu();
-                    } else {
-                        System.out.println("Incorrect password.");
-                    }
+                	Librarian librarian = new Librarian("admin123");
+                	librarian.showMenu();
                     break;
 
                 case 3:
