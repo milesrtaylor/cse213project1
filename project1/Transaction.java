@@ -11,7 +11,6 @@ public class Transaction {
 	private LocalDate return_date;
 	private static int next_id;
 
-	// TODO might want two constructors (one with due date and one which does it automatically)
 	public Transaction(int borrow_id, int student_id, int book_id, LocalDate borrow_date, LocalDate due_date, LocalDate return_date) {
         this.borrow_id = borrow_id;
         this.student_id = student_id;
@@ -41,8 +40,8 @@ public class Transaction {
     	return return_date; 
     }
 
-    public void markReturned(LocalDate returnDate) { 
-    	this.return_date = returnDate; 
+    public void markReturned(LocalDate return_date) { 
+    	this.return_date = return_date; 
     }
 
     public boolean isOverdue() {
@@ -58,10 +57,5 @@ public class Transaction {
             next_id = 301; // Wrap back to 301 if exceeding 310
         }
         return next_id++;
-    }
-    
-    @Override
-    public String toString() {
-        return borrow_id + ", " + student_id + ", " + book_id + ", " + borrow_date + ", " + due_date + ", " + (return_date == null ? "Not Returned" : return_date);
     }
 }
