@@ -61,7 +61,7 @@ public class MyMain {
                                     }
                                     break;
                                 case 2:
-                                    if (currentStudent.getBorrowedBooks().size() >= 3) {
+                                    if (currentStudent.getBorrowedBooks().size() >= 3) { // TODO: doesn't run
                                         System.out.println("You cannot borrow more than 3 books.");
                                         break;
                                     }
@@ -79,6 +79,7 @@ public class MyMain {
                                             transactions.add(new Transaction(transaction_id,
                                             		currentStudent.getId(), book.getId(),current_date,
                                             		current_date.plusWeeks(2), return_date));
+                                            currentStudent.borrowBook(book.getId());
                                             System.out.println("Book borrowed successfully.");
                                             borrowed = true;
                                             break;
@@ -98,9 +99,10 @@ public class MyMain {
                                     for (Book book : books) {
                                         if (book.getId() == return_id && !book.isAvailable()) {
                                             book.setAvailability(true);
-                                            final Student studentRef = currentStudent; // Need a final reference for lamba expression
+                                            final Student studentRef = currentStudent; // Need a final reference for lambda expression
                                             transactions.removeIf(t -> t.getBookId() == return_id
                                             		&& t.getStudentId() == studentRef.getId());
+                                            currentStudent.returnBook(book.getId());
                                             System.out.println("Book returned successfully.");
                                             returned = true;
                                             break;
@@ -134,13 +136,64 @@ public class MyMain {
 
                 case 2:
                 	Librarian librarian = new Librarian("admin123");
-                	librarian.showMenu();
-                    break;
+                	if (!librarian.authenticate()) {
+                        System.out.println("Incorrect password, access denied.");
+                        return;
+                    }
+                    
+                    while (true) { // TODO: probably should change this to if loop to match student menu
+                        System.out.println("\nLibrarian Menu:");
+                        System.out.println("1. List all books");
+                        System.out.println("2. List borrowed books");
+                        System.out.println("3. List overdue books");
+                        System.out.println("4. Exit");
+                        System.out.print("Choose an option: ");
+                        
+                        int librarian_choice = input.nextInt();
+                        input.nextLine(); 
+
+                        switch (librarian_choice) {
+                            case 1:
+                            	System.out.println("\nAll Books:");
+                                for (Book book : books) {
+                                    System.out.println(book);
+                                }
+                            	break;
+                            case 2:
+                            	System.out.println("\nBorrowed Books:");
+                                for (Transaction transaction : transactions) {
+                                    if (transaction.getReturnDate() == null) { // Book not returned
+                                        System.out.println("Book ID: " + transaction.getBookId()
+                                        + ", Borrowed by Student ID: " + transaction.getStudentId());
+                                    }
+                                }
+                            	break;
+                            case 3:
+                            	System.out.println("\nOverdue Books:");
+                                LocalDate today = LocalDate.now();
+                                for (Transaction transaction : transactions) {
+                                    if (transaction.getReturnDate() == null
+                                    		&& today.isAfter(transaction.getDueDate())) {
+                                        System.out.println("Book ID: " + transaction.getBookId() + 
+                                        " is overdue. Borrowed by Student ID: " + transaction.getStudentId());
+                                    }
+                                }
+                            	break;
+                            case 4:
+                            	System.out.println("Exiting librarian menu...");
+                            	break;
+                            default:
+                            	System.out.println("Invalid choice, try again.");
+                        }
+                        if (librarian_choice == 4) {
+                            break;
+                        }
+                    }
 
                 case 3:
                     System.out.println("Exiting system...");
                     input.close();
-                    return; // Exit the program
+                    return;
 
                 default:
                     System.out.println("Invalid choice, please try again.");
