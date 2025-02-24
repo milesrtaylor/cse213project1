@@ -38,17 +38,12 @@ public class Student {
     	return borrowed_books;
     }
 
-    public void borrowBook(int bookId) { 
+    public void borrowBook(int book_id) { 
         if (borrowed_books.size() < 3) 
-        	borrowed_books.add(bookId);
+        	borrowed_books.add(book_id);
     }
 
-    public void returnBook(int bookId) {
-    	borrowed_books.remove(Integer.valueOf(bookId));
-    }
-
-    @Override
-    public String toString() {
-        return id + ", " + name + ", " + grade + ", " + email + ", Borrowed: " + borrowed_books.size();
+    public void returnBook(int book_id) {
+    	borrowed_books.remove(Integer.valueOf(book_id));
     }
 }
