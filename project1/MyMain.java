@@ -61,7 +61,7 @@ public class MyMain {
                                     }
                                     break;
                                 case 2:
-                                    if (currentStudent.getBorrowedBooks().size() >= 3) { // TODO: doesn't run
+                                    if (currentStudent.getBorrowedBooks().size() >= 3) {
                                         System.out.println("You cannot borrow more than 3 books.");
                                         break;
                                     }
@@ -79,6 +79,7 @@ public class MyMain {
                                             transactions.add(new Transaction(transaction_id,
                                             		currentStudent.getId(), book.getId(),current_date,
                                             		current_date.plusWeeks(2), return_date));
+                                            currentStudent.getBorrowedBooks().add(book.getId());
                                             currentStudent.borrowBook(book.getId());
                                             System.out.println("Book borrowed successfully.");
                                             borrowed = true;
