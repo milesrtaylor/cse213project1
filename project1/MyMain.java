@@ -2,7 +2,6 @@ package project1;
 
 import java.io.*;
 import java.time.LocalDate;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import java.util.InputMismatchException;
