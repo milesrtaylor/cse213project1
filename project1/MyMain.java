@@ -5,6 +5,7 @@ import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class MyMain {
     public static void main(String[] args) {
@@ -20,7 +21,12 @@ public class MyMain {
             System.out.println("2. Librarian Mode");
             System.out.println("3. Exit");
             System.out.print("Choose an option: ");
-            int choice = input.nextInt();
+            int choice;
+            try {
+            	choice = input.nextInt();
+            } catch (InputMismatchException e) {
+            	choice = 0;
+            }
             input.nextLine();
 
             switch (choice) {
