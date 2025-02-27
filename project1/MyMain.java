@@ -148,11 +148,14 @@ public class MyMain {
                     }
                     
                     while (true) {
-                        System.out.println("\nLibrarian Menu:");
+                    	System.out.println("\nLibrarian Menu:");
                         System.out.println("1. List all books");
                         System.out.println("2. List borrowed books");
                         System.out.println("3. List overdue books");
-                        System.out.println("4. Exit");
+                        System.out.println("4. Add a book");
+                        System.out.println("5. Remove a book");
+                        System.out.println("6. Update a book");
+                        System.out.println("7. Exit");
                         System.out.print("Choose an option: ");
                         
                         int librarian_choice = input.nextInt();
@@ -186,12 +189,21 @@ public class MyMain {
                                 }
                             	break;
                             case 4:
+                                librarian.addBook(books, input);
+                                break;
+                            case 5:
+                            	librarian.removeBook(books, input);
+                                break;
+                            case 6:
+                            	librarian.updateBook(books, input);
+                                break;
+                            case 7:
                             	System.out.println("Exiting librarian menu...");
                             	break;
                             default:
                             	System.out.println("Invalid choice, try again.");
                         }
-                        if (librarian_choice == 4) {
+                        if (librarian_choice == 7) {
                             break;
                         }
                     }
