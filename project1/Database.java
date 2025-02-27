@@ -61,7 +61,16 @@ public class Database {
                 }
             }
     	}
-    	Transaction.setNextId(max_id + 1); // Update next available ID
+    	Transaction.setNextId(max_id + 1);
     	return transactions;
+    }
+    
+    public static void saveBooks(List<Book> books) throws IOException {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(book_file))) {
+            for (Book book : books) {
+                bw.write(book.toString());
+                bw.newLine();
+            }
+        }
     }
 }
